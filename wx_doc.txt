@@ -1,0 +1,54 @@
+
+# https://docs.wxpython.org/wx.Colour.html
+# https://docs.wxpython.org/wx.Window.html?highlight=setbackgroundcolour#wx.Window.SetBackgroundColour
+
+# self._input_text.Bind(wx.EVT_TEXT_ENTER, lambda _: self._api.onValidation())  # style=wx.TE_PROCESS_ENTER needed for self._input_text.
+
+dc = evt.GetDC()
+
+if not dc:
+    print("Happens?")
+    dc = wx.ClientDC(panel)
+    rect = panel.GetUpdateRegion().GetBox()
+    dc.SetClippingRect(rect)
+dc.Clear()
+bmp = wx.Bitmap("truc.png")
+wx.Bitmap.Rescale(bmp, dc.GetSize())
+dc.DrawBitmap(bmp, 0, 0)
+
+"""
+https://docs.wxpython.org/wx.AcceleratorTable.html
+Creation of an AcceleratorTable to binds local events.
+You will need to use wx.AcceleratorEntry to set up your shortcuts.
+i.e.:   entries = [wx.AcceleratorEntry() for i in range(3)]
+
+        entries[1].Set(wx.ACCEL_CTRL, ord('X'), wx.ID_EXIT)
+        entries[2].Set(wx.ACCEL_SHIFT, ord('A'), ID_ABOUT)
+        entries[3].Set(wx.ACCEL_NORMAL, wx.WXK_DELETE, wx.ID_CUT)
+
+        accel = wx.AcceleratorTable(entries)
+        frame.SetAcceleratorTable(accel)
+
+If you want to add your shortcuts to the ShortcutEditor, you need to create a tuple with the following format:
+(label, flags, keyCode, cmdID) where
+label:   the string used to show the accelerator into the ShortcutEditor dialog
+flags:   a bitmask of wx.ACCEL_ALT, wx.ACCEL_SHIFT, wx.ACCEL_CTRL, wx.ACCEL_CMD,
+         or wx.ACCEL_NORMAL used to specify which modifier keys are held down
+keyCode: the keycode to be detected (i.e., ord('b'), wx.WXK_F10, etc...)
+cmdID:   the menu or control command ID to use for the accelerator event.
+
+i.e.: tuple = ("&Open", wx.ACCEL_CTRL, ord('O'), wx.ID_OPEN)
+"""
+
+"""
+https://docs.wxpython.org/wx.lib.agw.shortcuteditor.html
+Creation of the shortcut editor and display of all shortcuts bind to it.
+You can add shortcuts from menus and accelerator tables. When all changes are finished, you need to send them back.
+i.e.:   sc_editor = ShortcutEditor(self)
+        sc_editor.FromAcceleratorTable(self._accel_table)
+        sc_editor.FromMenuBar(self)
+
+        if sc_editor.ShowModal() == wx.ID_OK:  # Changes accepted
+            sc_editor.ToMenuBar(self)
+            sc_editor.ToAcceleratorTable(self)
+"""
