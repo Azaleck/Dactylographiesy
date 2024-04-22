@@ -57,11 +57,8 @@ class SuperJeu:
 
     def setCurrentInputText(self, new_text: str):
         self._current_input_text = new_text
-        print(new_text)
-        print(new_text)
-        print(new_text)
-        print(new_text)
-        self.textPassed()
+        if new_text:
+            self.textPassed()
 
     def textPassed(self) -> str:
         pass
@@ -154,7 +151,7 @@ class SuperJeu:
             event.Skip()
             return
         if event.GetKeyCode() == 32:  # wx.WXK_SPACE but no import
-            print("Space bar used")
+            self.setCurrentInputText(" ")
             event.Skip()
             return
         if dots_key_map.get(event.GetKeyCode(), -1) < 0:
@@ -174,8 +171,8 @@ class SuperJeu:
                 dots_sum += dots_key_map.get(key, 0)
 
         # Send code and reset dictionary
-        print(f"passed : {codeIntToChar(dots_sum)}")
+        self.setCurrentInputText(codeIntToChar(dots_sum))
         self._input_perkins_dict = {}
 
     def run(self):
-        self.setNewDisplay("bienvenue")
+        self.setNewDisplay("Bienvenue")
