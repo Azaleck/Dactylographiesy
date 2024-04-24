@@ -3,6 +3,7 @@ import wx
 from Source.APIs.Marble.marble_input_mixin import MarbleInputMixin
 from Source.APIs.Marble.marble_display_mixin import MarbleDisplayMixin
 from Source.APIs.Marble.marble_menubar_mixin import MarbleMenuBarMixin
+from jeu2 import Jeu2
 from superjeu import SuperJeu, GUIflag
 from jeu1 import Jeu1
 
@@ -30,7 +31,7 @@ class MarbleFrame(wx.Frame, MarbleDisplayMixin, MarbleInputMixin, MarbleMenuBarM
         """ Constructor. """
         super().__init__(parent=None, title="Marble", size=wx.Size(width=WINDOW_WIDTH, height=WINDOW_HEIGHT))
 
-        self._api = Jeu1(notify_gui=self.callToObserver)
+        self._api = Jeu2(notify_gui=self.callToObserver)
 
         # Loading images
         self.current_background_image = 0

@@ -3,6 +3,7 @@ from superjeu import SuperJeu
 from definitions import getPhrase
 
 
+# Petit exemple d'un jeu/leçon très simple
 class Jeu1(SuperJeu):
 
     def __init__(self, notify_gui: callable):
@@ -26,7 +27,6 @@ class Jeu1(SuperJeu):
 
             case 3:
                 phrase = getPhrase("intro_jeu_3")
-                print(phrase)
 
             case _:  # code un peu pourri, servant de "leçon"
                 phrase = "intro_jeu_"
@@ -34,7 +34,7 @@ class Jeu1(SuperJeu):
                     self._valeurIntro += 1
                     phrase += str(self._valeurIntro)
                 else:
-                    phrase += str(self._valeurIntro)+"_error"
+                    phrase += str(self._valeurIntro) + "_error"
                 phrase = getPhrase(phrase)
 
         self.setNewDisplay(phrase + f" (Tu as écrit : {letter})")

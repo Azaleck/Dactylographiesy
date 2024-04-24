@@ -60,6 +60,7 @@ class SuperJeu:
         if new_text:
             self.textPassed()
 
+    # Main method that does our logic when inputting something
     def textPassed(self) -> str:
         pass
 
