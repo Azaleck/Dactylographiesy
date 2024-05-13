@@ -1,3 +1,5 @@
+import csv
+
 TOKEN_SPACE = 0b00000000  # 0x00 =>  0
 TOKEN_1 = 0b00000001  # 0x01 =>  1
 TOKEN_2 = 0b00000010  # 0x02 =>  2
@@ -134,6 +136,13 @@ def getPhrase(code: str) -> str:
     for _str, _phrase in PHRASES.items():
         if code == _str:
             return _phrase
+
+
+# Opens up and returns a CSV file
+# This should be used to load a dictionary
+def openLesson(name: str) -> csv.DictReader:
+    with open(f'{name}.csv', newline='') as f:
+        return csv.DictReader(f)
 
 
 PHRASES = {
