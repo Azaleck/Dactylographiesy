@@ -14,28 +14,25 @@ class Jeu2(SuperJeu):
 
         self._to_ask = {}
         self.one_remaining = {}
-        for letter in "gtrdcvkiuhn":
+        # Noter ici qu'on charge dans l'ordre, puis dans l'ordre inverse
+        for letter in "qsdfmlkj":
             # add display string
-            display = "Appuie sur la lettre "
-            # top/bottom (nous commençons par le milieu, puis haut, milieu, bas)
-            if load % 3 != 0:
-                if (load // 3) % 2 == 0:
-                    display += "en haut "
-                else:
-                    display += "en bas "
+            display = f"Appuie sur la lettre {letter} qui se situe sur ton "
+            # doigts
+            match(load%4):
+                case 0:
+                    display += "auriculaire"
+                case 1:
+                    display += "annuaire"
+                case 2:
+                    display += "majeur"
+                case 3:
+                    display += "index"
 
-            # left/right
-            if ((load + 1) // 3) % 2 == 0:
-                display += "à droite "
+            if 4 > load:
+                display += " gauche."
             else:
-                display += "à gauche "
-
-            display += "de la lettre "
-
-            if 5 < load:
-                display += "J."
-            else:
-                display += "F."
+                display += " droit."
 
             self._to_ask[letter] = display
             self.one_remaining[letter] = False
@@ -62,7 +59,7 @@ class Jeu2(SuperJeu):
                     return
             else :
                 self.one_remaining[self._letter_to_ask] = True
-            print(f"{char_input}, {self.one_remaining}")
+            # print(f"{char_input}, {self.one_remaining}") to
         else:
             phrase += f"Ce n'est pas la bonne lettre. La lettre demandée était {self._letter_to_ask}. "
             self.one_remaining[self._letter_to_ask] = False
