@@ -1,6 +1,6 @@
 import wx
 
-from Source.marble_wx import MarbleFrame
+from Source.APIs.Marble.parameters_wx import MarbleFrame
 
 if __name__ == "__main__":
 

@@ -54,6 +54,25 @@ class MarbleDisplayMixin:
 
         return self._display_text
 
+    def _setupParameterTextMixin(self, main_panel, acc_table):
+        # Creating the input text zone.
+        self._parameter_text = wx.StaticText(parent=main_panel, label="Taille de police", style=wx.NO_BORDER | wx.TE_READONLY | wx.TE_CENTER | wx.TE_RICH2)
+        self._parameter_text.AcceptsFocusFromKeyboard = lambda: False  # Because no 'wx.TE_MULTILINE'
+
+        # Binding local shortcuts.
+        self._parameter_text.SetAcceleratorTable(acc_table)
+
+        # Setting the font size.
+        new_font = self._parameter_text.GetFont()
+        font_size = new_font.GetPixelSize().GetHeight()
+        new_font.SetFractionalPointSize(new_font.GetFractionalPointSize()*4)
+        self._parameter_text.SetFont(new_font)
+
+        # Setting the minimal height.
+        self._parameter_text.SetMinSize(wx.Size(width=0, height=6*font_size-10))
+
+        return self._parameter_text
+
     def _refreshDisplay(self):
         self._display_text.SetValue(self._api.getCurrentDisplay())
         
